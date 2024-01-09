@@ -10,7 +10,7 @@ Moviestack follows an iterative development process. Each phase occurs in dedica
 
 ### Iterations
 
-It'll consist of repeated iterations of the project; modifiying, adding, improving, fixing, debugging it until finished and pushed to the `Main` branch.
+It'll consist of repeated iterations of the project; modifiying, adding, improving, fixing, debugging it until finished and pushed to the `Main` branch as a compplete, usable App.
 
 
 
