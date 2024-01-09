@@ -8,6 +8,9 @@ Moviestack is an evolving movie-related project. This repository marks the initi
 
 Moviestack follows an iterative development process. Each phase occurs in dedicated branches, adding features and fixes incrementally.
 
+### Iterations
 
-Moviestack is continuously evolving project, continuously evolving towards a stellar movie application! 🌟
+It'll consist of repeated iterations of the project; modifiying, adding, improving, fixing, debugging it until finished and pushed to the `Main` branch.
+
+Moviestack is continuously evolving project, evolving towards a stellar movie application! 🌟
 ==========================================================================================================
