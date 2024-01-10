@@ -81,6 +81,7 @@ main {
 .banner img{
   width: 85dvw;
   height: 45dvh;
+  padding-bottom: 2em;
   /* border: #fff 1px solid; */
 }
 
@@ -167,6 +168,56 @@ footer {
   font-size: xx-large;
   color: rgb(96, 205, 255);
 }
+
+.filtersSection {
+  width: 90%;
+}
+
+#filterForm {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.filters{
+  width: 40%;
+  height: 3em;
+  border: 0.2em darkorchid solid;
+  background-color: #ceb8d2;
+  color: #741585;
+  font-size: 22px;
+  text-align: center;
+  overflow: hidden;
+}
+
+#bttnRemoveFilters {
+  width: 10%;
+  height: 5em;
+  border: 0.2em darkorchid solid;
+  background-color: #ceb8d2;
+  color: #741585;
+  transition: 0.2s;
+}
+
+#bttnRemoveFilters:hover {
+  transition: 0.2s;
+  scale: 1.1;
+}
+
+#bttnRemoveFilters:active {
+  transition: 0.2s;
+  scale: 0.8;
+  border: 0.2em rgb(255, 64, 0) solid;
+  background-color: #d2b8b8;
+  color: #ff1c1c;
+}
+
+
+
+
+
 
 
 

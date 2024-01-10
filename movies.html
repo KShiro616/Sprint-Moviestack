@@ -25,9 +25,26 @@
   </header>
 
   <main>
+
     <div class="banner">
       <img src="./assets/Movies.jpg" alt="Moviestack Banner">
     </div>
+
+    <section class="filtersSection">
+
+      <form id="filterForm">
+
+          <select class="filters" id="selectGenres">
+          </select>
+
+          <input id="search" type="text" class="filters" placeholder="Busca una peli wachin">
+
+          <input type="button" value="Remove Filters" id="bttnRemoveFilters">
+
+      </form>
+
+    </section>
+
     <section class="displayMovies"></section>
   </main>
 
