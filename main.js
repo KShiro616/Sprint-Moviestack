@@ -121,14 +121,12 @@ $removeFilters.addEventListener("click", () => renderCards(moviesArray) )
 
 $search.addEventListener("keyup", (event) => renderCards(filterByName(event, moviesArray)) )
 
-$selectGenres.addEventListener("change", (event) => renderCards(selectGenre(event, filterByName(event, moviesArray))))
+$selectGenres.addEventListener("change", (event) => renderCards(selectGenre(event, moviesArray)))
 
 
 
 function selectGenre(event, allMovies) {
 
-  console.log(allMovies);
-  
   const filteredMovies = [];
 
   const genreSelected = event.target.value;
@@ -139,6 +137,7 @@ function selectGenre(event, allMovies) {
 }
 
 function filterByName(event, moviesArray) {
+
   textInput = event.target.value;
 
   const filteredMoviesToDisplay = [];
@@ -152,11 +151,7 @@ function filterByName(event, moviesArray) {
 
   const removedDuplicates = Array.from( new Set(filteredMoviesToDisplay) )
 
-  console.log(removedDuplicates)
-
   return removedDuplicates;
-
-  
 }
 
 
