@@ -123,6 +123,8 @@ $search.addEventListener("keyup", (event) => renderCards(filterByName(event, mov
 
 $selectGenres.addEventListener("change", (event) => renderCards(selectGenre(event, moviesArray)))
 
+// $selectGenres.addEventListener("change", (event) => renderCards(selectGenre(event, filterByName(event, moviesArray))))
+
 
 
 function selectGenre(event, allMovies) {
