@@ -11,7 +11,17 @@ const $search = document.getElementById("search")
 
 const $removeFilters = document.getElementById("bttnRemoveFilters")
 
+$displayMovies.addEventListener("click", (event) => displayCardInfo(event, moviesArray))
 
+
+function displayCardInfo(event, moviesArray) {
+  movieToShow = event.target.parentElement.children[1];
+
+  //toDo
+
+
+
+}
 
 const createCard = (movie) => {
   return `
@@ -26,8 +36,6 @@ const createCard = (movie) => {
 
 const renderCards = (moviesToRender) => {
   
-  console.log("renderCards EXECUTED");
-
   $displayMovies.innerHTML = "";
   
   let obtainMovies = "";
@@ -35,8 +43,6 @@ const renderCards = (moviesToRender) => {
   moviesToRender.forEach(movie => {
     obtainMovies+= createCard(movie)
   });
-
-  console.log(obtainMovies);
   
   $displayMovies.innerHTML+= obtainMovies;
 };
@@ -60,33 +66,31 @@ function addGenreToSelect(movies) {
   $selectGenres.innerHTML+= saveGenresObtained;
 }
 
+addGenreToSelect(moviesArray)
+
 function selectGenre(event, filteredMoviesArray) {
   const filteredMovies = [];
 
   const genreSelected = event.target.value;
 
   filteredMoviesArray.forEach(movie => movie.genres.includes(genreSelected) ? filteredMovies.push(movie) : '' ); 
+
+  renderCards(filteredMovies)
 }
+
 
 
 $search.addEventListener("keyup", (event) => filterByName(event, moviesArray) )
 
 $removeFilters.addEventListener("click", () => renderCards(moviesArray) )
 
-$selectGenres.addEventListener("change", (event) => selectGenre(event))
+$selectGenres.addEventListener("change", (event) => selectGenre(event, moviesArray))
 
 
 
 function filterByName(event, moviesArray) {
 
   textInput = event.target.value;
-
-  let auxArr = [...moviesArray]
-
-  if (textInput == '') {
-    console.log("noInput");
-    renderCards(auxArr)
-  };
 
   console.log(textInput === '')
 
