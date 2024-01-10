@@ -14,18 +14,62 @@ const $removeFilters = document.getElementById("bttnRemoveFilters")
 $displayMovies.addEventListener("click", (event) => displayCardInfo(event, moviesArray))
 
 
-function displayCardInfo(event, moviesArray) {
-  movieToShow = event.target.parentElement.children[1];
+function displayCardInfo(event) {
 
-  //toDo
+  $displayMovies.innerHTML = '';
 
+  cardInfo = event.target.parentElement.id;
 
+  console.log(cardInfo)
 
+  const movieData = moviesArray[cardInfo] 
+  
+  const table = document.createElement("table")
+  table.innerHTML+= `
+  <thead>
+    <th>genre</th>
+    <th>OL</th>
+    <th>overview</th>
+    <th>popularity</th>
+    <th>release date</th>
+    <th>title</th>
+    <th>vote average</th>
+    <th>vote count</th>
+    <th>homepage</th>
+    <th>revenue</th>
+    <th>runtime</th>
+    <th>status</th>
+    <th>tagline</th>
+    <th>budget</th>
+  </thead>
+  <tbody>
+  <tr>
+    <td>${movieData.genres.toString()}</td>
+    <td>${movieData.original_language}</td>
+    <td>${movieData.overview}</td>
+    <td>${movieData.popularity}</td>
+    <td>${movieData.release_date}</td>
+    <td>${movieData.title}</td>
+    <td>${movieData.vote_average}</td>
+    <td>${movieData.vote_count}</td>
+    <td>${movieData.homepage}</td>
+    <td>${movieData.revenue}</td>
+    <td>${movieData.runtime}</td>
+    <td>${movieData.status}</td>
+    <td>${movieData.tagline}</td>
+    <td>${movieData.budget}</td>
+  <tr>
+  </tbody>
+  `
+
+  $displayMovies.appendChild(table)
 }
 
-const createCard = (movie) => {
+
+
+const createCard = (movie, id) => {
   return `
-  <article class="card">
+  <article class="card" id="${id}">
   <img src="${movie.image}">
   <h2>${movie.title}</h2>
   <h3>${movie.tagline}</h3>
@@ -39,9 +83,12 @@ const renderCards = (moviesToRender) => {
   $displayMovies.innerHTML = "";
   
   let obtainMovies = "";
+
+  let cardIndex = 0;
   
   moviesToRender.forEach(movie => {
-    obtainMovies+= createCard(movie)
+    obtainMovies+= createCard(movie, cardIndex)
+    cardIndex++
   });
   
   $displayMovies.innerHTML+= obtainMovies;
@@ -68,31 +115,30 @@ function addGenreToSelect(movies) {
 
 addGenreToSelect(moviesArray)
 
-function selectGenre(event, filteredMoviesArray) {
-  const filteredMovies = [];
 
-  const genreSelected = event.target.value;
-
-  filteredMoviesArray.forEach(movie => movie.genres.includes(genreSelected) ? filteredMovies.push(movie) : '' ); 
-
-  renderCards(filteredMovies)
-}
-
-
-
-$search.addEventListener("keyup", (event) => filterByName(event, moviesArray) )
 
 $removeFilters.addEventListener("click", () => renderCards(moviesArray) )
+
+$search.addEventListener("keyup", (event) => filterByName(event, moviesArray) )
 
 $selectGenres.addEventListener("change", (event) => selectGenre(event, moviesArray))
 
 
 
+function selectGenre(event, allMovies) {
+
+  const filteredMovies = [];
+
+  const genreSelected = event.target.value;
+
+  allMovies.forEach(movie => movie.genres.includes(genreSelected) ? filteredMovies.push(movie) : '' ); 
+
+  renderCards(filteredMovies)
+}
+
 function filterByName(event, moviesArray) {
 
   textInput = event.target.value;
-
-  console.log(textInput === '')
 
   const filteredMoviesToDisplay = [];
 
@@ -105,7 +151,7 @@ function filterByName(event, moviesArray) {
 
   const removedDuplicates = Array.from( new Set(filteredMoviesToDisplay) )
 
-  renderCards(removedDuplicates);
+  renderCards(removedDuplicates)
 }
 
 

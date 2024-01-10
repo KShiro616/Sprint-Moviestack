@@ -214,6 +214,14 @@ footer {
   color: #ff1c1c;
 }
 
+table {
+  color: white;
+  padding: 1em;
+  border-collapse: collapse;
+  border: 1px white solid;
+  height: 50dvh;
+}
+
 
 
 
