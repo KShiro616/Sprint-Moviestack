@@ -1,7 +1,7 @@
 Moviestack Project 🎬🚀 Sprint-2
 =================================
 ### Description
-toDo xd
+I know my CSS aint the prettiest but I'll be working on it; it should be ready for the next sprint.
 
--S
-==
+
+
