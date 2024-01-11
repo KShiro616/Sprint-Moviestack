@@ -91,17 +91,14 @@ $removeFilters.addEventListener("click", () => renderCards(moviesArray))
 $search.addEventListener("keyup", (event) => renderCards(filterByName(event, moviesArray)))
 
 $selectGenres.addEventListener("change", (event) => {
-
   const change = event;
-  
+  renderCards(selectGenre(change, moviesArray))
+
   $search.addEventListener("keyup", (event) => {
-    
     const filtered = filterByName(event, moviesArray)
-  
     renderCards(selectGenre(change, filtered))
   })
-  
-  
+
   })
 
 function selectGenre(event, allMovies) {
