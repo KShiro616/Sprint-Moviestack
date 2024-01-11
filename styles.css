@@ -216,18 +216,20 @@ footer {
 }
 
 table {
-  color: white;
-  padding: 1em;
+  align-self: flex-start;
+  color: rgb(206, 107, 191);
   border-collapse: collapse;
-  border: 1px white solid;
-  height: 50dvh;
+  height: 15dvh;
 }
 
+table th, td {
+  border: 2px solid #d84deb;
+}
 
-
-
-
-
+table > th, td {
+  width: 5dvw;
+  padding: 2em;
+}
 
 
 @media screen and (max-width: 400px) {

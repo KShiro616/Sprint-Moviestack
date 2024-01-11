@@ -11,21 +11,15 @@ const $search = document.getElementById("search")
 
 const $removeFilters = document.getElementById("bttnRemoveFilters")
 
-$displayMovies.addEventListener("click", (event) => displayCardInfo(event, moviesArray))
-
-
-function displayCardInfo(event) {
-
+function displayCardInfo(event, allMovies) {
   $displayMovies.innerHTML = '';
 
   cardInfo = event.target.parentElement.id;
 
-  console.log(cardInfo)
+  const movieData = allMovies[cardInfo]
 
-  const movieData = moviesArray[cardInfo] 
-  
   const table = document.createElement("table")
-  table.innerHTML+= `
+  table.innerHTML += `
   <thead>
     <th>genre</th>
     <th>OL</th>
@@ -65,9 +59,7 @@ function displayCardInfo(event) {
   $displayMovies.appendChild(table)
 }
 
-
-
-const createCard = (movie, id) => {
+function createCard(movie, id) {
   return `
   <article class="card" id="${id}">
   <img src="${movie.image}">
@@ -76,93 +68,95 @@ const createCard = (movie, id) => {
   <p>${movie.overview}</p>
   </article>
   `
-};
+};  
 
-const renderCards = (moviesToRender) => {
+function addGenreToSelect(movies) {
+  let decompressedGenres = movies.map(movie => movie.genres).flat()
+
+  let removeDuplicates = Array.from(new Set(decompressedGenres));
+
+  let genresToAdd = removeDuplicates; //for the sake of readability; not really necesary tho
+
+  let saveGenresObtained = '';
+
+  genresToAdd.forEach(genre => {
+    saveGenresObtained += `<option class="option" value="${genre}">${genre}</option>`;
+  });
+
+  $selectGenres.innerHTML += saveGenresObtained;
+}
+
+$removeFilters.addEventListener("click", () => renderCards(moviesArray))
+
+$search.addEventListener("keyup", (event) => renderCards(filterByName(event, moviesArray)))
+
+$selectGenres.addEventListener("change", (event) => {
+
+  const change = event;
   
+  $search.addEventListener("keyup", (event) => {
+    
+    const filtered = filterByName(event, moviesArray)
+  
+    renderCards(selectGenre(change, filtered))
+  })
+  
+  
+  })
+
+function selectGenre(event, allMovies) {
+  const genreSelected = event.target.value;
+
+  if (genreSelected === "All Genres") return allMovies;
+
+  const filteredMovies = [];
+
+  allMovies.forEach(movie => movie.genres.includes(genreSelected) ? filteredMovies.push(movie) : '');
+
+  return filteredMovies;
+}
+
+function filterByName(event, moviesArray) {
+  const textInput = event.target.value;
+
+  if (!event.target.value) {return moviesArray} else console.log(event.target.value ? event.target.value : "false")
+
+  const filteredMovies = [];
+
+  moviesArray.forEach(movie => {
+    movie.title.toLowerCase().split("").includes(textInput.toLowerCase()) && textInput !== "" ? filteredMovies.push(movie) : '';
+    movie.title.toLowerCase().includes(textInput.toLowerCase().split(" ")[0]) && textInput !== "" ? filteredMovies.push(movie) : '';
+    movie.title.toLowerCase().includes(textInput.toLowerCase().split(" ")[1]) && textInput !== "" ? filteredMovies.push(movie) : '';
+  });
+
+  const removeDuplicates = Array.from(new Set(filteredMovies))
+
+  return removeDuplicates;
+}
+
+
+function renderCards(moviesToRender) {
+  console.log(`${moviesToRender} renderCards`)
+
   $displayMovies.innerHTML = "";
-  
+
   let obtainMovies = "";
 
-  let cardIndex = 0;
-  
+  let cardIndex = 0; //As I add an "index" as each card's Id, it becomes signigicantly simpler to display each card's info.
+
   moviesToRender.forEach(movie => {
-    obtainMovies+= createCard(movie, cardIndex)
+    obtainMovies += createCard(movie, cardIndex)
     cardIndex++
   });
-  
-  $displayMovies.innerHTML+= obtainMovies;
+
+  $displayMovies.innerHTML += obtainMovies;
+
+  const allCards = document.querySelectorAll(".card")
+  allCards.forEach(card => card.addEventListener("click", (event) => displayCardInfo(event, moviesToRender)))
 
   return moviesToRender;
 };
 
 renderCards(moviesArray)
 
-function addGenreToSelect(movies) {
-  let decompressedGenres = movies.map( movie => movie.genres).flat()
-
-  let removeDuplicates = Array.from( new Set(decompressedGenres) );
-
-  let genresToAdd = removeDuplicates;
-  
-
-  let saveGenresObtained = '';
-
-  genresToAdd.forEach(genre => {
-    saveGenresObtained+= `<option class="option" value="${genre}">${genre}</option>`;
-  });
-
-  $selectGenres.innerHTML+= saveGenresObtained;
-}
-
 addGenreToSelect(moviesArray)
-
-
-
-$removeFilters.addEventListener("click", () => renderCards(moviesArray) )
-
-$search.addEventListener("keyup", (event) => renderCards(filterByName(event, moviesArray)) )
-
-$selectGenres.addEventListener("change", (event) => genreSelector(event))
-
-function genreSelector(event) {
-  if (event.target.value === "All Genres") {
-    renderCards(moviesArray)
-  } else {
-    const filteredMovies = selectGenre(event, moviesArray);
-    renderCards(filteredMovies)
-  }
-};
-
-function selectGenre(event, allMovies) {
-
-  
-  const genreSelected = event.target.value;
-  
-  const filteredMovies = [];
-
-  allMovies.forEach(movie => movie.genres.includes(genreSelected) ? filteredMovies.push(movie) : '' ); 
-
-  return filteredMovies;
-}
-
-function filterByName(event, moviesArray) {
-
-  textInput = event.target.value;
-
-  if (textInput === "") return renderCards(moviesArray);
-  
-  const filteredMoviesToDisplay = []
-  
-  moviesArray.forEach(movie => {  
-    movie.title.toLowerCase().split("").includes(textInput.toLowerCase()) && textInput !== "" ? filteredMoviesToDisplay.push(movie)  :  '';
-    movie.title.toLowerCase().includes(textInput.toLowerCase().split(" ")[0]) && textInput !== "" ? filteredMoviesToDisplay.push(movie)  : '';
-    movie.title.toLowerCase().includes(textInput.toLowerCase().split(" ")[1]) && textInput !== "" ? filteredMoviesToDisplay.push(movie)  : '';
-  });
-
-  const removeDuplicates = new Set (filteredMoviesToDisplay)
-
-  return removeDuplicates;
-}
-
-
