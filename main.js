@@ -92,6 +92,8 @@ const renderCards = (moviesToRender) => {
   });
   
   $displayMovies.innerHTML+= obtainMovies;
+
+  return moviesToRender;
 };
 
 renderCards(moviesArray)
@@ -121,17 +123,23 @@ $removeFilters.addEventListener("click", () => renderCards(moviesArray) )
 
 $search.addEventListener("keyup", (event) => renderCards(filterByName(event, moviesArray)) )
 
-$selectGenres.addEventListener("change", (event) => renderCards(selectGenre(event, moviesArray)))
+$selectGenres.addEventListener("change", (event) => genreSelector(event))
 
-// $selectGenres.addEventListener("change", (event) => renderCards(selectGenre(event, filterByName(event, moviesArray))))
-
-
+function genreSelector(event) {
+  if (event.target.value === "All Genres") {
+    renderCards(moviesArray)
+  } else {
+    const filteredMovies = selectGenre(event, moviesArray);
+    renderCards(filteredMovies)
+  }
+};
 
 function selectGenre(event, allMovies) {
 
-  const filteredMovies = [];
-
+  
   const genreSelected = event.target.value;
+  
+  const filteredMovies = [];
 
   allMovies.forEach(movie => movie.genres.includes(genreSelected) ? filteredMovies.push(movie) : '' ); 
 
@@ -142,18 +150,19 @@ function filterByName(event, moviesArray) {
 
   textInput = event.target.value;
 
-  const filteredMoviesToDisplay = [];
-
-  moviesArray.forEach(movie => {
-    
+  if (textInput === "") return renderCards(moviesArray);
+  
+  const filteredMoviesToDisplay = []
+  
+  moviesArray.forEach(movie => {  
     movie.title.toLowerCase().split("").includes(textInput.toLowerCase()) && textInput !== "" ? filteredMoviesToDisplay.push(movie)  :  '';
-    movie.title.toLowerCase().includes(textInput.toLowerCase()) && textInput !== "" ? filteredMoviesToDisplay.push(movie)  : '';
-
+    movie.title.toLowerCase().includes(textInput.toLowerCase().split(" ")[0]) && textInput !== "" ? filteredMoviesToDisplay.push(movie)  : '';
+    movie.title.toLowerCase().includes(textInput.toLowerCase().split(" ")[1]) && textInput !== "" ? filteredMoviesToDisplay.push(movie)  : '';
   });
 
-  const removedDuplicates = Array.from( new Set(filteredMoviesToDisplay) )
+  const removeDuplicates = new Set (filteredMoviesToDisplay)
 
-  return removedDuplicates;
+  return removeDuplicates;
 }
 
 
