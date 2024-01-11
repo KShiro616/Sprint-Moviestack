@@ -92,7 +92,6 @@ main > article {
   text-align: center;
   width: 90%;
   height: fit-content;
-  /* border: #fff 1px solid; */
 }
 
 footer {
@@ -232,6 +231,8 @@ table > th, td {
 }
 
 .tablesStyling {
+  width: 50dvw;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -240,6 +241,7 @@ table > th, td {
   border: 2px solid #d84deb;
   border-radius: 0.5em;
   margin: 1rem;
+  padding: 0.6em;
 }
 
 

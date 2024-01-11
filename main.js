@@ -40,6 +40,8 @@ function addGenreToSelect(movies) {
 
 $removeFilters.addEventListener("click", () => renderCards(moviesArray))
 
+
+
 $search.addEventListener("keyup", (event) => renderCards(filterByName(event, moviesArray)))
 
 $selectGenres.addEventListener("change", (event) => {
@@ -70,11 +72,14 @@ function filterByName(event, moviesArray) {
   const textInput = event.target.value;
 
   if (!event.target.value) return moviesArray;
+
   const filteredMovies = [];
 
   moviesArray.forEach(movie => {
     movie.title.toLowerCase().split("").includes(textInput.toLowerCase()) && textInput !== "" ? filteredMovies.push(movie) : '';
+
     movie.title.toLowerCase().includes(textInput.toLowerCase().split(" ")[0]) && textInput !== "" ? filteredMovies.push(movie) : '';
+    
     movie.title.toLowerCase().includes(textInput.toLowerCase().split(" ")[1]) && textInput !== "" ? filteredMovies.push(movie) : '';
   });
 
@@ -102,7 +107,9 @@ function renderCards(moviesToRender) {
   const allCards = document.querySelectorAll(".card")
 
   allCards.forEach(card => card.addEventListener("click", (event) => {
-    displayCardInfo(event, moviesToRender);
+    const movieID = moviesArray[card.id]
+
+    window.location.href = `./details.html?id=${movieID.id}`
   }))
 
   return moviesToRender;
@@ -111,60 +118,3 @@ function renderCards(moviesToRender) {
 renderCards(moviesArray)
 
 addGenreToSelect(moviesArray)
-
-function displayCardInfo(event, allMovies) {
-  $displayMovies.innerHTML = '';
-
-  const $displayTables = document.querySelector(".displayMovies");
-
-  $displayTables.classList.add("tablesStyling")
-
-  cardId = event.target.parentElement.id;
-
-  const movieData = allMovies[cardId];
-
-  const table1 = document.createElement("table");
-
-  const table2 = document.createElement("table");
-
-  const movieImage = document.createElement("div");
-  movieImage.innerHTML+= `
-  <h1> ${movieData.title}</h1>
-  <img src="${movieData.image}" alt="image for the ${movieData.title} movie">
-  `
-
-  table1.innerHTML += `
-  <thead>
-    <th>Original Language</th>
-    <th>Release Date</th>
-    <th>Runtime</th>
-    <th>Status</th>
-    </thead>
-  <tbody>
-  <tr>
-  <td>${movieData.original_language}</td>
-  <td>${movieData.release_date}</td>
-  <td>${movieData.runtime}</td>
-  <td>${movieData.status}</td>
-  <tr>
-  </tbody>
-  `
-  table2.innerHTML += `
-  <thead>
-    <th>vote average</th>
-    <th>budget</th>
-    <th>revenue</th>
-    </thead>
-  <tbody>
-  <tr>
-  <td>${movieData.vote_average}</td>
-  <td>${movieData.budget}</td>
-  <td>${movieData.revenue}</td>
-  <tr>
-  </tbody>
-  `
-  $displayTables.appendChild(table1)
-  $displayTables.appendChild(movieImage)
-  $displayTables.appendChild(table2)
-}
-
