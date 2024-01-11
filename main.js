@@ -102,8 +102,7 @@ function renderCards(moviesToRender) {
   const allCards = document.querySelectorAll(".card")
 
   allCards.forEach(card => card.addEventListener("click", (event) => {
-    window.location.href = './details.html'
-    displayCardInfo(event, moviesToRender)
+    displayCardInfo(event, moviesToRender);
   }))
 
   return moviesToRender;
