@@ -11,54 +11,6 @@ const $search = document.getElementById("search")
 
 const $removeFilters = document.getElementById("bttnRemoveFilters")
 
-function displayCardInfo(event, allMovies) {
-  $displayMovies.innerHTML = '';
-
-  cardInfo = event.target.parentElement.id;
-
-  const movieData = allMovies[cardInfo]
-
-  const table = document.createElement("table")
-  table.innerHTML += `
-  <thead>
-    <th>genre</th>
-    <th>OL</th>
-    <th>overview</th>
-    <th>popularity</th>
-    <th>release date</th>
-    <th>title</th>
-    <th>vote average</th>
-    <th>vote count</th>
-    <th>homepage</th>
-    <th>revenue</th>
-    <th>runtime</th>
-    <th>status</th>
-    <th>tagline</th>
-    <th>budget</th>
-  </thead>
-  <tbody>
-  <tr>
-    <td>${movieData.genres.toString()}</td>
-    <td>${movieData.original_language}</td>
-    <td>${movieData.overview}</td>
-    <td>${movieData.popularity}</td>
-    <td>${movieData.release_date}</td>
-    <td>${movieData.title}</td>
-    <td>${movieData.vote_average}</td>
-    <td>${movieData.vote_count}</td>
-    <td>${movieData.homepage}</td>
-    <td>${movieData.revenue}</td>
-    <td>${movieData.runtime}</td>
-    <td>${movieData.status}</td>
-    <td>${movieData.tagline}</td>
-    <td>${movieData.budget}</td>
-  <tr>
-  </tbody>
-  `
-
-  $displayMovies.appendChild(table)
-}
-
 function createCard(movie, id) {
   return `
   <article class="card" id="${id}">
@@ -92,6 +44,7 @@ $search.addEventListener("keyup", (event) => renderCards(filterByName(event, mov
 
 $selectGenres.addEventListener("change", (event) => {
   const change = event;
+
   renderCards(selectGenre(change, moviesArray))
 
   $search.addEventListener("keyup", (event) => {
@@ -116,8 +69,7 @@ function selectGenre(event, allMovies) {
 function filterByName(event, moviesArray) {
   const textInput = event.target.value;
 
-  if (!event.target.value) {return moviesArray} else console.log(event.target.value ? event.target.value : "false")
-
+  if (!event.target.value) return moviesArray;
   const filteredMovies = [];
 
   moviesArray.forEach(movie => {
@@ -131,11 +83,10 @@ function filterByName(event, moviesArray) {
   return removeDuplicates;
 }
 
-
 function renderCards(moviesToRender) {
-  console.log(`${moviesToRender} renderCards`)
-
   $displayMovies.innerHTML = "";
+
+  $displayMovies.classList.remove("tablesStyling")
 
   let obtainMovies = "";
 
@@ -149,7 +100,11 @@ function renderCards(moviesToRender) {
   $displayMovies.innerHTML += obtainMovies;
 
   const allCards = document.querySelectorAll(".card")
-  allCards.forEach(card => card.addEventListener("click", (event) => displayCardInfo(event, moviesToRender)))
+
+  allCards.forEach(card => card.addEventListener("click", (event) => {
+    window.location.href = './details.html'
+    displayCardInfo(event, moviesToRender)
+  }))
 
   return moviesToRender;
 };
@@ -157,3 +112,60 @@ function renderCards(moviesToRender) {
 renderCards(moviesArray)
 
 addGenreToSelect(moviesArray)
+
+function displayCardInfo(event, allMovies) {
+  $displayMovies.innerHTML = '';
+
+  const $displayTables = document.querySelector(".displayMovies");
+
+  $displayTables.classList.add("tablesStyling")
+
+  cardId = event.target.parentElement.id;
+
+  const movieData = allMovies[cardId];
+
+  const table1 = document.createElement("table");
+
+  const table2 = document.createElement("table");
+
+  const movieImage = document.createElement("div");
+  movieImage.innerHTML+= `
+  <h1> ${movieData.title}</h1>
+  <img src="${movieData.image}" alt="image for the ${movieData.title} movie">
+  `
+
+  table1.innerHTML += `
+  <thead>
+    <th>Original Language</th>
+    <th>Release Date</th>
+    <th>Runtime</th>
+    <th>Status</th>
+    </thead>
+  <tbody>
+  <tr>
+  <td>${movieData.original_language}</td>
+  <td>${movieData.release_date}</td>
+  <td>${movieData.runtime}</td>
+  <td>${movieData.status}</td>
+  <tr>
+  </tbody>
+  `
+  table2.innerHTML += `
+  <thead>
+    <th>vote average</th>
+    <th>budget</th>
+    <th>revenue</th>
+    </thead>
+  <tbody>
+  <tr>
+  <td>${movieData.vote_average}</td>
+  <td>${movieData.budget}</td>
+  <td>${movieData.revenue}</td>
+  <tr>
+  </tbody>
+  `
+  $displayTables.appendChild(table1)
+  $displayTables.appendChild(movieImage)
+  $displayTables.appendChild(table2)
+}
+

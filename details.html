@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Details</title>
+  <link rel="shortcut icon" href="./assets/Moviestack_favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+
+  <header>
+    <section class="headerWrapper">
+      <img class="imgLogo" src="./assets/Moviestack_logotipo1.png" alt="Moviestack's logo">
+      <img class="imgIsotype" src="./assets/Moviestack_isotipo.png" alt="Moviestack's logo">
+      <nav>
+        <a class="active" href="./index.html">HOME</a>
+        <a href="./movies.html">MOVIES</a>
+        <a href="#">FAVS</a>
+      </nav>
+    </section>
+  </header>
+
+  <main class="main">
+    <section class="banner">
+      <img src="./assets/banner_favs.jpg" alt="My favourites banner">
+    </section>
+
+      <section class="filtersSection">
+        <form id="filterForm">
+
+          <select class="filters" id="selectGenres">
+            <option value="All Genres">All Genres</option>
+          </select>
+
+          <input id="search" type="text" class="filters" placeholder="Search...">
+
+          <input type="button" value="Reset display" id="bttnRemoveFilters">
+        </form>
+      </section>
+
+      <section class="displayMovies"> </section>
+
+      <div class="tableWrapper">
+                <div class="tablesCol1"></div>
+        <div class="tablesCol2"></div>
+
+      </div>
+  </main>
+  <footer>
+    MindHub - Cohort N°53 Nicolas Rodriguez
+  </footer>
+
+  <script src="./data.js"></script>
+  <script src="./main.js"></script>
+</body>
+
+</html>

@@ -216,10 +216,9 @@ footer {
 }
 
 table {
-  align-self: flex-start;
   color: rgb(206, 107, 191);
   border-collapse: collapse;
-  height: 15dvh;
+  height: 5dvh;
 }
 
 table th, td {
@@ -228,7 +227,35 @@ table th, td {
 
 table > th, td {
   width: 5dvw;
-  padding: 2em;
+  padding: 1em;
+  text-align: center;
+}
+
+.tablesStyling {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  border: 2px solid #d84deb;
+  border-radius: 0.5em;
+  margin: 1rem;
+}
+
+
+.tablesStyling > div {
+  color: #d84deb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+
+.tablesStyling > div img {
+  border: 2px solid #d84deb;
+  border-radius: 0.5em;
+
 }
 
 
