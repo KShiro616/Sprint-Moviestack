@@ -4,16 +4,18 @@ const cardID = location.search;
 
 const urlParams = new URLSearchParams(cardID).get("id");
 
-let obtainMovie;
+let obtainMovie = [];
 
 for (const movie of arrayMovies) {
-  if(movie.id == urlParams) obtainMovie = movie;
+  if(movie.id == urlParams) obtainMovie.push(movie);
 }
 
 console.log(obtainMovie)
 
 
 function displayCardInfo(obtainMovie) {
+
+  obtainMovie = obtainMovie[0];
 
   const $displayTables = document.querySelector(".goku");
 

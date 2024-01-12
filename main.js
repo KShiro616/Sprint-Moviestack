@@ -38,23 +38,32 @@ function addGenreToSelect(movies) {
   $selectGenres.innerHTML += saveGenresObtained;
 }
 
-$removeFilters.addEventListener("click", () => renderCards(moviesArray))
+$removeFilters.addEventListener("click", () => {
+  $search.value = "";
+  $selectGenres.value = "All Genres";
+  renderCards(moviesArray);
+})
 
+$search.addEventListener("input", (event) => {
+  const input = event;
+  renderCards(filterByName(input, moviesArray))
 
-
-$search.addEventListener("keyup", (event) => renderCards(filterByName(event, moviesArray)))
+  $selectGenres.addEventListener("change", (event) => {
+    const filtered = selectGenre(event, moviesArray)
+    renderCards(filterByName(input, filtered))
+  })
+})
 
 $selectGenres.addEventListener("change", (event) => {
   const change = event;
 
   renderCards(selectGenre(change, moviesArray))
 
-  $search.addEventListener("keyup", (event) => {
+  $search.addEventListener("input", (event) => {
     const filtered = filterByName(event, moviesArray)
     renderCards(selectGenre(change, filtered))
   })
-
-  })
+})
 
 function selectGenre(event, allMovies) {
   const genreSelected = event.target.value;
@@ -105,6 +114,7 @@ function renderCards(moviesToRender) {
   $displayMovies.innerHTML += obtainMovies;
 
   const allCards = document.querySelectorAll(".card")
+
 
   allCards.forEach(card => card.addEventListener("click", (event) => {
     const movieID = moviesArray[card.id]
