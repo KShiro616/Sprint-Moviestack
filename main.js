@@ -1,4 +1,3 @@
-
 const moviesArray = Movies;
 
 const $filterForm = document.getElementById("id");
@@ -18,6 +17,9 @@ function createCard(movie, id) {
   <h2>${movie.title}</h2>
   <h3>${movie.tagline}</h3>
   <p>${movie.overview}</p>
+  
+  <a href="details.html?id=${movie.id}"> See more </a>
+  
   </article>
   `
 };  
@@ -44,29 +46,36 @@ $removeFilters.addEventListener("click", () => {
   renderCards(moviesArray);
 })
 
-$search.addEventListener("input", (event) => {
-  const input = event;
-  renderCards(filterByName(input, moviesArray))
+$search.addEventListener("keyup", (event) => {
+  const keyup = event;
 
-  $selectGenres.addEventListener("change", (event) => {
-    const filtered = selectGenre(event, moviesArray)
-    renderCards(filterByName(input, filtered))
-  })
+  // renderCards(filterByName($search, moviesArray))
+
+  const filtered = selectGenre($selectGenres, moviesArray)
+  renderCards(filterByName($search, filtered))
+
+  // $selectGenres.addEventListener("change", (event) => {
+  // })
 })
 
 $selectGenres.addEventListener("change", (event) => {
-  const change = event;
+  // const change = event;
 
-  renderCards(selectGenre(change, moviesArray))
+  // renderCards(selectGenre(change, moviesArray))
 
-  $search.addEventListener("input", (event) => {
-    const filtered = filterByName(event, moviesArray)
-    renderCards(selectGenre(change, filtered))
-  })
+  // $search.addEventListener("keyup", (event) => {
+  //   const filtered = filterByName(event, moviesArray)
+  //   renderCards(selectGenre(change, filtered))
+  // })
+
+  const filtered = selectGenre($selectGenres, moviesArray)
+  renderCards(filterByName($search, filtered))
+
+
 })
 
 function selectGenre(event, allMovies) {
-  const genreSelected = event.target.value;
+  const genreSelected = event.value;
 
   if (genreSelected === "All Genres") return allMovies;
 
@@ -78,18 +87,18 @@ function selectGenre(event, allMovies) {
 }
 
 function filterByName(event, moviesArray) {
-  const textInput = event.target.value;
+  const textInput = event.value;
 
-  if (!event.target.value) return moviesArray;
+  if (!textInput) return moviesArray;
 
   const filteredMovies = [];
 
   moviesArray.forEach(movie => {
-    movie.title.toLowerCase().split("").includes(textInput.toLowerCase()) && textInput !== "" ? filteredMovies.push(movie) : '';
+    movie.title.toLowerCase().split("").includes(textInput.toLowerCase()) ? filteredMovies.push(movie) : '';
 
-    movie.title.toLowerCase().includes(textInput.toLowerCase().split(" ")[0]) && textInput !== "" ? filteredMovies.push(movie) : '';
+    movie.title.toLowerCase().includes(textInput.toLowerCase().split(" ")[0]) ? filteredMovies.push(movie) : '';
     
-    movie.title.toLowerCase().includes(textInput.toLowerCase().split(" ")[1]) && textInput !== "" ? filteredMovies.push(movie) : '';
+    movie.title.toLowerCase().includes(textInput.toLowerCase().split(" ")[1]) ? filteredMovies.push(movie) : '';
   });
 
   const removeDuplicates = Array.from(new Set(filteredMovies))
@@ -113,14 +122,13 @@ function renderCards(moviesToRender) {
 
   $displayMovies.innerHTML += obtainMovies;
 
-  const allCards = document.querySelectorAll(".card")
+  // const allCards = document.querySelectorAll(".card")
 
+  // allCards.forEach(card => card.addEventListener("click", (event) => {
+  //   const movieID = moviesArray[card.id]
 
-  allCards.forEach(card => card.addEventListener("click", (event) => {
-    const movieID = moviesArray[card.id]
-
-    window.location.href = `./details.html?id=${movieID.id}`
-  }))
+  //   window.location.href = `./details.html?id=${movieID.id}`
+  // }))
 
   return moviesToRender;
 };
@@ -128,3 +136,17 @@ function renderCards(moviesToRender) {
 renderCards(moviesArray)
 
 addGenreToSelect(moviesArray)
+
+const numeros = [23, 7, 45, 12, 36, 5, 49, 18, 30, 8];
+
+const numerosFiltrados = numeros.filter(num => num >= 10);
+
+const numerosOrdenados = numerosFiltrados.sort((a, b) => b - a)
+
+const sumaNumeros = numerosOrdenados.reduce((acumulador, numeroIterado) => acumulador+= numeroIterado)
+
+
+const primerInpar = numerosOrdenados.find(numeroInpar => numeroInpar % 2 !== 0)
+
+console.log(primerInpar)
+

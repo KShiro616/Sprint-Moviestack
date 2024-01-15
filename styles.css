@@ -250,7 +250,6 @@ table > th, td {
   padding: 0.6em;
 }
 
-
 .tablesStyling > div {
   color: #d84deb;
   display: flex;
@@ -263,9 +262,7 @@ table > th, td {
 .tablesStyling > div img {
   border: 2px solid #d84deb;
   border-radius: 0.5em;
-
 }
-
 
 @media screen and (max-width: 400px) {
   .headerWrapper {
@@ -336,5 +333,6 @@ table > th, td {
     text-align: center;
   }
 }
+
 
 
