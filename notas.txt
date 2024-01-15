@@ -5,7 +5,7 @@
 3- completar details;
 
 4- parsear numeros details;
-
+ 
 5- para hacer wrappers o conatiners por temas de estilo, usar divs, respetar semantica, article lleva un encabezado;
 
 6- evitar usar tres millones de eventos;

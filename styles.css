@@ -115,7 +115,7 @@ footer {
 }
 
 .card {
-
+  background-color: #5d5d5d;
   width: 30%;
   height: 45vh;
   color:#fff;
@@ -132,6 +132,8 @@ footer {
 }
 
 .card img {
+  max-width: 100%;
+  height: auto;
   border-radius: 0.3em;
 }
 .card p{
@@ -140,6 +142,12 @@ footer {
 
 .card h3 {
   font-style: italic;
+}
+
+.card svg.svg-heart {
+  align-self: flex-end;
+  width: 40px;
+  height: 40px;
 }
 
 .callToActionContainer {

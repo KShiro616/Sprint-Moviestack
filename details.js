@@ -1,4 +1,4 @@
-const arrayMovies = Movies;
+import { getMovies } from "./fetch.js";
 
 const cardID = location.search;
 
@@ -6,12 +6,16 @@ const urlParams = new URLSearchParams(cardID).get("id");
 
 let obtainMovie = [];
 
-for (const movie of arrayMovies) {
-  if(movie.id == urlParams) obtainMovie.push(movie);
-}
 
-console.log(obtainMovie)
+getMovies()
+  .then(moviesArray => {
+    for (const movie of moviesArray) {
+      if(movie.id == urlParams) obtainMovie.push(movie);
+    }
+    displayCardInfo(obtainMovie) //always invoke the function within the promise!!!!
+  })
 
+  .catch(error => console.log(error))
 
 function displayCardInfo(obtainMovie) {
 
@@ -30,7 +34,7 @@ function displayCardInfo(obtainMovie) {
   const movieImage = document.createElement("div");
   movieImage.innerHTML+= `
   <h1> ${movieData.title}</h1>
-  <img src="${movieData.image}" alt="image for the ${movieData.title} movie">
+  <img src="https://moviestack.onrender.com/static/${movieData.image}" alt="image for the ${movieData.title} movie">
   `
 
   table1.innerHTML += `
@@ -67,5 +71,3 @@ function displayCardInfo(obtainMovie) {
   $displayTables.appendChild(movieImage)
   $displayTables.appendChild(table2)
 }
-
-displayCardInfo(obtainMovie)
