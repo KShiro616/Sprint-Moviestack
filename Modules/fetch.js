@@ -1,4 +1,4 @@
-import { apiKey, apiURL } from "./variablesConstants.js"
+import { apiKey, apiURL } from "./Constants.js"
 
 export function getMovies() {
   

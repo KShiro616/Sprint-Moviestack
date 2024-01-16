@@ -1,6 +1,6 @@
-import { getMovies } from "./fetch.js";
+import { getMovies } from "./Modules/fetch.js";
 
-import { $displayMovies } from "./variablesConstants.js";
+import { $displayMovies } from "./Modules/Constants.js";
 
 function createCard(movie) {
   return `
@@ -21,7 +21,7 @@ function createCard(movie) {
 
   </article>
   `
-};  
+};
 
 function renderCards(moviesToRender) {
   $displayMovies.innerHTML = "";
@@ -46,7 +46,7 @@ getMovies()
 
     for (const movie of moviesArray) {
       for (const fav of favorites) {
-        if(fav == movie.id) {
+        if (fav == movie.id) {
           matchedFavorites.push(movie)
         }
       }
@@ -58,34 +58,33 @@ getMovies()
   .catch(error => console.error(error))
 
 
+$displayMovies.addEventListener("click", (event) => {
+  const clickedOn = event.target;
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-$displayMovies.addEventListener("click", (event)=>{
-    const clickedOn = event.target;
-    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  if (clickedOn.classList.contains("svg-heart")) {
 
-    if (clickedOn.classList.contains("svg-heart")) {
-      
-      const movieId = clickedOn.dataset.clickedCardMovieId;
-      const updateFavorites = favorites.filter(id => id !== movieId ) 
+    const movieId = clickedOn.dataset.clickedCardMovieId;
+    const updateFavorites = favorites.filter(id => id !== movieId)
 
-      localStorage.setItem("favorites", JSON.stringify(updateFavorites))
+    localStorage.setItem("favorites", JSON.stringify(updateFavorites))
 
-      getMovies()
-  .then(moviesArray => {
-    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    const matchedFavorites = [];
+    getMovies()
+      .then(moviesArray => {
+        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        const matchedFavorites = [];
 
-    for (const movie of moviesArray) {
-      for (const fav of favorites) {
-        if(fav == movie.id) {
-          matchedFavorites.push(movie)
+        for (const movie of moviesArray) {
+          for (const fav of favorites) {
+            if (fav == movie.id) {
+              matchedFavorites.push(movie)
+            }
+          }
         }
-      }
-    }
 
-    renderCards(matchedFavorites)
+        renderCards(matchedFavorites)
 
-  })
-  .catch(error => console.error(error))
-    }
-  })
+      })
+      .catch(error => console.error(error))
+  }
+})

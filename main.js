@@ -1,6 +1,6 @@
-import { getMovies } from "./fetch.js";
+import { getMovies } from "./Modules/fetch.js";
 
-import { $displayMovies, $selectGenres, $search, $removeFilters } from "./variablesConstants.js";
+import { $displayMovies, $selectGenres, $search, $removeFilters } from "./Modules/Constants.js";
 
 getMovies()
   .then(moviesArray => {
@@ -111,19 +111,17 @@ function filterByName(event, moviesArray) {
 
 $displayMovies.addEventListener("click", (event) => {
   const clickedOn = event.target;
-  /*Here instead of adding a bazillion event listeners, 
+  /* Here instead of adding a bazillion event listeners, 
   I just check if the target clicked upon contains the svg-heart class; 
   if so, proceed with the logic. I've used this approach as Nico told 
   me to try to avoid having too many event listeners;
-   in this case, I would've added an event listener for every svg but that's not ideal as I'd have +180 event listeners. */
+  in this case, I would've added an event listener for every svg but 
+   that's not ideal as I'd have +180 event listeners. */
   if (clickedOn.classList.contains("svg-heart")) {
-    const movieId = clickedOn.dataset.clickedCardMovieId
+    const movieId = clickedOn.dataset.clickedCardMovieId;
 
     saveToFavorites(movieId)
   }
-
-
-  
 })
 
 function saveToFavorites(movieId) {
