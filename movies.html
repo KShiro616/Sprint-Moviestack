@@ -8,6 +8,7 @@
   <title>Movies</title>
   <link rel="shortcut icon" href="./assets/Moviestack_favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="./styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -25,28 +26,19 @@
   </header>
 
   <main>
-
     <div class="banner">
       <img src="./assets/Movies.jpg" alt="Moviestack Banner">
     </div>
-
     <div class="filtersSection">
-
       <form id="filterForm">
-
           <select class="filters" id="selectGenres">
             <option value="All Genres">All Genres</option>
           </select>
-
           <input id="search" type="text" class="filters" placeholder="Search...">
-
           <input type="button" value="Remove filters" id="bttnRemoveFilters">
-
       </form>
-
     </div>
-
-    <section class="displayMovies"></section>
+    <div class="displayMovies"></div>
   </main>
 
   <footer>

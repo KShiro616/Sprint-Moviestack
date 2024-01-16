@@ -4,8 +4,8 @@
 }
 
 body {
-  height: 100dvh;
-  width: 100dvw;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   flex-grow: 2;
@@ -95,6 +95,12 @@ main > article {
   height: fit-content;
 }
 
+main .welcomeText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em
+}
+
 footer {
   border: #fff 1px solid;
   color: #fff;
@@ -136,19 +142,11 @@ footer {
   height: auto;
   border-radius: 0.3em;
 }
-.card p{
-  overflow:hidden;
-}
 
 .card h3 {
   font-style: italic;
 }
 
-.card svg.svg-heart {
-  align-self: flex-end;
-  width: 40px;
-  height: 40px;
-}
 
 .callToActionContainer {
   width: 100%;
@@ -248,7 +246,7 @@ table > th, td {
   width: 50dvw;
   height: fit-content;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   align-content: center;
@@ -256,6 +254,7 @@ table > th, td {
   border-radius: 0.5em;
   margin: 1rem;
   padding: 0.6em;
+  gap: 1rem;
 }
 
 .tablesStyling > div {
@@ -270,6 +269,11 @@ table > th, td {
 .tablesStyling > div img {
   border: 2px solid #d84deb;
   border-radius: 0.5em;
+}
+
+.tablesStyling > article {
+  color: #d84deb;
+  width: 50%;
 }
 
 @media screen and (max-width: 400px) {
