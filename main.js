@@ -23,10 +23,10 @@ function createCard(movie, isFav) {
     <p>${movie.overview}</p>
     <a href="details.html?id=${movie.id}"> See more </a>
 
-    <svg data-clicked-card-movie-id="${movie.id}" class="fav h-7 w-7 overflow-visible self-end">
+    <svg data-clicked-card-movie-id="${movie.id}" class="notFav h-7 w-7 overflow-visible self-end">
     <g transform="translate(0 -1028.4)">
-    <path d="m7 1031.4c-1.5355 0-3.0784 0.5-4.25 1.7-2.3431 2.4-2.2788 6.1 0 8.5l9.25 9.8 9.25-9.8c2.279-2.4 2.343-6.1 0-8.5-2.343-2.3-6.157-2.3-8.5 0l-0.75 0.8-0.75-0.8c-1.172-1.2-2.7145-1.7-4.25-1.7z" fill="#c0392b"/>
-    </g>
+    <path class="z-index-0" d="m7 1031.4c-1.5355 0-3.0784 0.5-4.25 1.7-2.3431 2.4-2.2788 6.1 0 8.5l9.25 9.8 9.25-9.8c2.279-2.4 2.343-6.1 0-8.5-2.343-2.3-6.157-2.3-8.5 0l-0.75 0.8-0.75-0.8c-1.172-1.2-2.7145-1.7-4.25-1.7z" fill="#c0392b"/>
+  </g>
     </svg>
   
     </article>
@@ -163,7 +163,7 @@ function saveToFavorites(movieId, clickedOn) {
     clickedOn.innerHTML = `
     <g transform="translate(0 -1028.4)">
     <path d="m7 1031.4c-1.5355 0-3.0784 0.5-4.25 1.7-2.3431 2.4-2.2788 6.1 0 8.5l9.25 9.8 9.25-9.8c2.279-2.4 2.343-6.1 0-8.5-2.343-2.3-6.157-2.3-8.5 0l-0.75 0.8-0.75-0.8c-1.172-1.2-2.7145-1.7-4.25-1.7z" fill="#c0392b"/>
-    </g>
+  </g>
     `
     return localStorage.setItem("favorites", JSON.stringify(favorites))
   }
@@ -173,15 +173,14 @@ function saveToFavorites(movieId, clickedOn) {
 
 function removeFromFavorites(movieId, clickedOn) {
 
-  console.log(movieId);
-
-  const idMovie = clickedOn.parent.dataset.clickedCardMovieId;
-
-  console.log(idMovie);
-
   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-  const updateFavorites = favorites.filter(id => id !== idMovie)
+  const updateFavorites = favorites.filter(id => id !== movieId)
 
+  clickedOn.innerHTML = `
+  <g transform="translate(0 -1028.4)">
+  <path d="m7 1031.4c-1.5355 0-3.0784 0.5-4.25 1.7-2.3431 2.4-2.2788 6.1 0 8.5l9.25 9.8 9.25-9.8c2.279-2.4 2.343-6.1 0-8.5-2.343-2.3-6.157-2.3-8.5 0l-0.75 0.8-0.75-0.8c-1.172-1.2-2.7145-1.7-4.25-1.7z" stroke="#000000" fill="none" stroke-width="1"/>
+</g>
+  `
   return localStorage.setItem("favorites", JSON.stringify(updateFavorites))
 }
 

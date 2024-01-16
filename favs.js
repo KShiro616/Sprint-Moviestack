@@ -4,7 +4,7 @@ import { $displayMovies } from "./Modules/Constants.js";
 
 function createCard(movie) {
   return `
-  <article class="card">
+  <article class="card h-auto">
 
   <img src="https://moviestack.onrender.com/static/${movie.image}">
   <h2>${movie.title}</h2>
