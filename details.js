@@ -33,9 +33,9 @@ function displayCardInfo(obtainMovie) {
 
   const details = document.createElement("article")
   details.innerHTML+= `
-  <h1> ${movieData.title}</h1>
-  <h3> ${movieData.tagline}</h3>
-  <p> ${movieData.overview}</p>
+  <h1 class="text-2xl"> ${movieData.title}</h1>
+  <h3 class="text-xl text-purple-600"> ${movieData.tagline}</h3>
+  <p class="text-sm text-white"> ${movieData.overview}</p>
   `
 
   const movieImage = document.createElement("div");
@@ -52,10 +52,10 @@ function displayCardInfo(obtainMovie) {
     </thead>
   <tbody>
   <tr>
-  <td>${movieData.original_language}</td>
-  <td>${movieData.release_date}</td>
-  <td>${movieData.runtime}</td>
-  <td>${movieData.status}</td>
+  <td class="text-xl text-white">${movieData.original_language}</td>
+  <td class="text-sm text-white">${movieData.release_date}</td>
+  <td class="text-sm text-white">${movieData.runtime}</td>
+  <td class="text-sm text-white">${movieData.status}</td>
   <tr>
   </tbody>
   `
@@ -67,9 +67,9 @@ function displayCardInfo(obtainMovie) {
     </thead>
   <tbody>
   <tr>
-  <td>${movieData.vote_average}</td>
-  <td>${Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(movieData.budget)}USD</td>
-  <td>${Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(movieData.revenue)}USD</td>
+  <td class="text-sm text-white">${movieData.vote_average}</td>
+  <td class="text-sm text-white">${Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(movieData.budget)}USD</td>
+  <td class="text-sm text-white">${Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(movieData.revenue)}USD</td>
   <tr>
   </tbody>
   `

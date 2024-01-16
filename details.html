@@ -14,13 +14,13 @@
 <body>
 
   <header>
-    <div class="headerWrapper">
+    <div class="headerWrapper flex flex-wrap h-auto">
       <img class="imgLogo" src="./assets/Moviestack_logotipo1.png" alt="Moviestack's logo">
       <img class="imgIsotype" src="./assets/Moviestack_isotipo.png" alt="Moviestack's logo">
-      <nav>
+      <nav class="flex flex-wrap">
         <a class="active" href="./index.html">HOME</a>
         <a href="./movies.html">MOVIES</a>
-        <a href="#">FAVS</a>
+        <a href="./favs.html">FAVS</a>
       </nav>
     </div>
   </header>
@@ -31,13 +31,11 @@
     </div>
       <div class="displayTables"></div>
   </main>
-  
+
+  <script type="module" src="./details.js"></script>
   <footer>
     MindHub - Cohort N°53 Nicolas Rodriguez
   </footer>
-
-  <script type="module" src="./Module/fetch.js"></script>
-  <script type="module" src="./details.js"></script>
 </body>
 
 </html>
