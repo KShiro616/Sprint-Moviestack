@@ -1,9 +1,8 @@
-Moviestack Project 🎬🚀 Sprint-2
+Moviestack Project 🎬🚀 Sprint-3
 =================================
 ### Description
-I know my CSS aint the prettiest but I'll be working on it; it should be ready for the next sprint.
 
-Filters are working as expected, and optimized aswell :)
+Well everything is working as expected for the sprint 3, tho I havent parsed my project to tailwind yet; and the styles are rather otherworldy disgusting but hey, there's the functionality!
 
 
 
