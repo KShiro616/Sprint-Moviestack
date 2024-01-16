@@ -1,4 +1,4 @@
-import { getMovies } from "./fetch.js";
+import { getMovies } from "./Modules/fetch.js";
 
 const cardID = location.search;
 
@@ -21,7 +21,7 @@ function displayCardInfo(obtainMovie) {
 
   obtainMovie = obtainMovie[0];
 
-  const $displayTables = document.querySelector(".goku");
+  const $displayTables = document.querySelector(".displayTables");
 
   $displayTables.classList.add("tablesStyling")
 
@@ -31,9 +31,15 @@ function displayCardInfo(obtainMovie) {
 
   const table2 = document.createElement("table");
 
+  const details = document.createElement("article")
+  details.innerHTML+= `
+  <h1> ${movieData.title}</h1>
+  <h3> ${movieData.tagline}</h3>
+  <p> ${movieData.overview}</p>
+  `
+
   const movieImage = document.createElement("div");
   movieImage.innerHTML+= `
-  <h1> ${movieData.title}</h1>
   <img src="https://moviestack.onrender.com/static/${movieData.image}" alt="image for the ${movieData.title} movie">
   `
 
@@ -62,12 +68,13 @@ function displayCardInfo(obtainMovie) {
   <tbody>
   <tr>
   <td>${movieData.vote_average}</td>
-  <td>${movieData.budget}</td>
-  <td>${movieData.revenue}</td>
+  <td>${Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(movieData.budget)}USD</td>
+  <td>${Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(movieData.revenue)}USD</td>
   <tr>
   </tbody>
   `
-  $displayTables.appendChild(table1)
   $displayTables.appendChild(movieImage)
+  $displayTables.appendChild(details)
+  $displayTables.appendChild(table1)
   $displayTables.appendChild(table2)
 }
